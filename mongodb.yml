@@ -1,4 +1,4 @@
-- name: Connecting MongoDB
+- name: Setup MongoDB
   hosts: all
   become: yes
   tasks:
