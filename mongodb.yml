@@ -6,20 +6,23 @@
       ansible.builtin.copy:
         src: mongodb.repo
         dest: /etc/yum.repos.d/mongodb.repo
-    - name: Installing Nginx Server
+
+    - name: Installing MongoDB Server
       ansible.builtin.yum:
         name: mongodb-org
-        state: present
+        state: latest
+
     - name: Replace a localhost entry with our own
       ansible.builtin.replace:
         path: /etc/mongod.conf
-        regexp: '^127\.0\.0\.1'
+        regexp: '127.0.0.1'
         replace: '0.0.0.0'
-    - name: Restarting the MongoDB Server
+
+    - name: Start MongoDB Service
       ansible.builtin.systemd:
         name: mongodb
         state: restarted
-        enabled: yes
+        enabled: true
 
 #echo -e '\e[33mCopy MongoDB repo file\e[0m'
 #cp /root/roboshop-shell/mongodb.repo /etc/yum.repos.d/mongodb.repo &>>/tmp/roboshop.log
