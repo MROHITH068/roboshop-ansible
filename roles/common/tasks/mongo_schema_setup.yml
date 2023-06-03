@@ -9,4 +9,4 @@
     state: installed
 
 - name: Loading the Schema
-  ansible.builtin.shell:   mongo --host mongodb-dev.rohdevops.online </app/schema/{{ component }}.js
+  ansible.builtin.shell:   mongo --host 172.31.2.123 </app/schema/{{ component }}.js
