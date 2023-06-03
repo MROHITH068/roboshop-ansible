@@ -1,38 +1,5 @@
 - name: Setup MongoDB
   hosts: all
   become: yes
-  tasks:
-    - name: Copy MongoDB repo file
-      ansible.builtin.copy:
-        src: mongodb.repo
-        dest: /etc/yum.repos.d/mongodb.repo
-
-    - name: Installing MongoDB Server
-      ansible.builtin.yum:
-        name: mongodb-org
-        state: latest
-
-    - name: Replace a localhost entry with our own
-      ansible.builtin.replace:
-        path: /etc/mongod.conf
-        regexp: '127.0.0.1'
-        replace: '0.0.0.0'
-
-    - name: Start MongoDB Service
-      ansible.builtin.systemd:
-        name: mongod
-        state: restarted
-        enabled: true
-
-#echo -e '\e[33mCopy MongoDB repo file\e[0m'
-#cp /root/roboshop-shell/mongodb.repo /etc/yum.repos.d/mongodb.repo &>>/tmp/roboshop.log
-#
-#echo -e '\e[33mInstalling MongoDB Server\e[0m'
-#yum install mongodb-org -y &>>/tmp/roboshop.log
-#
-#echo -e '\e[33mModify the config file\e[0m'
-#sed -i 's/127.0.0.1/0.0.0.0/' /etc/mongod.conf &>>/tmp/roboshop.log
-#
-#echo -e '\e[33mStart MongoDB Server\e[0m'
-#systemctl enable mongod &>>/tmp/roboshop.log
-#systemctl restart mongod &>>/tmp/roboshop.log
+  roles:
+    - mongodb
