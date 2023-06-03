@@ -6,3 +6,6 @@
     name: nodejs
     state: installed
 
+- name: preapp_setup
+  ansible.builtin.import_tasks:
+    file: preapp_setup.yml
