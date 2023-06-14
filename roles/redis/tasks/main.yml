@@ -1,0 +1,48 @@
+- name: Downloading Redis Repo File
+  ansible.builtin.yum:
+    name: https://rpms.remirepo.net/enterprise/remi-release-8.rpm -y
+    state: installed
+
+- name: Enabling the required Module
+  ansible.builtin.shell: yum module enable redis:remi-6.2 -y
+
+- name: Install Redis
+  ansible.builtin.dnf:
+    name: redis
+    state: installed
+
+- name: Update Redis Listen Address - /etc/redis.conf
+  ansible.builtin.replace:
+    path: /etc/redis.conf
+    regexp: '127.0.0.1'
+    replace: '0.0.0.0'
+
+- name: Update Redis Listen Address - /etc/redis/redis.conf
+  ansible.builtin.replace:
+    path: /etc/redis/redis.conf
+    regexp: '127.0.0.1'
+    replace: '0.0.0.0'
+
+- name: Start Redis Service
+  ansible.builtin.systemd:
+    name: redis
+    state: restarted
+    enabled: yes
+
+
+
+#echo -e '\e[33mDownloading Redis Repo File\e[0m'
+#yum install https://rpms.remirepo.net/enterprise/remi-release-8.rpm -y &>>/tmp/roboshop.log
+#
+#echo -e '\e[33mEnabling the required Module\e[0m'
+#yum module enable redis:remi-6.2 -y &>>/tmp/roboshop.log
+#
+#echo -e '\e[33mInstalling Redis\e[0m'
+#yum install redis -y &>>/tmp/roboshop.log
+#
+#echo -e '\e[33mUpdating the Port\e[0m'
+#sed -i 's/127.0.0.1/0.0.0.0/' /etc/redis.conf /etc/redis/redis.conf &>>/tmp/roboshop.log
+#
+#echo -e '\e[33mStarting the Service\e[0m'
+#systemctl enable redis &>>/tmp/roboshop.log
+#systemctl restart redis &>>/tmp/roboshop.log
