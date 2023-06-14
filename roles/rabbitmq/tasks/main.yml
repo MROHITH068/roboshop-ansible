@@ -1,5 +1,5 @@
 
-- name: Configure erlang Repos
+- name: Configure erlang & rabbitmq-server Repos
   ansible.builtin.shell: curl -s https://packagecloud.io/install/repositories/rabbitmq/{{ item }} | bash
   loop:
     - erlang/script.rpm.sh
