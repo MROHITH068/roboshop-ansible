@@ -1,7 +1,7 @@
 - name: Copy Elastic Repo file
   ansible.builtin.template:
     src: elastic.repo
-    dst: /etc/yum.repos.d/elastic.repo
+    dest: /etc/yum.repos.d/elastic.repo
 
 - name: Install Firebeat
   ansible.builtin.yum:
@@ -11,7 +11,7 @@
 - name: Copy Filebeat yml file
   ansible.builtin.template:
     src: filebeat.repo
-    dst: /etc/filebeat/filebeat.yml
+    dest: /etc/filebeat/filebeat.yml
 
 - name: Restart Filebeat
   ansible.builtin.systemd:
