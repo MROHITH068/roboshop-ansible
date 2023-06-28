@@ -32,8 +32,8 @@ scrape_configs:
         filters:
           - name: "tag:Monitor"
             values: [ "true","yes" ]
-    relabel_configs:
-{% for item in tags %}
-      - source_labels: [ __meta_ec2_tag_{{item}} ]
-        target_label: {{item}}
-{% endfor %}
+#    relabel_configs:
+#{% for item in tags %}
+#      - source_labels: [ __meta_ec2_tag_{{item}} ]
+#        target_label: {{item}}
+#{% endfor %}
