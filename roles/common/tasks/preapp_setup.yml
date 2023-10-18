@@ -20,6 +20,6 @@
 
 - name: Downloading and Unzipping the app Content from nexus
   ansible.builtin.unarchive:
-    src: http://54.81.209.228:8081/repository/{{component}}/{{component}}-{{app_version}}.zip
+    src: http://{{ lookup('amazon.aws.aws_ssm', 'roboshop.nexus.username', region='us-east-1') }}:{{ lookup('amazon.aws.aws_ssm', 'roboshop.nexus.password', region='us-east-1') }}@54.81.209.228:8081/repository/{{component}}/{{component}}-{{app_version}}.zip
     dest: /app
     remote_src: yes
