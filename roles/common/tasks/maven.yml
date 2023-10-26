@@ -8,10 +8,11 @@
   ansible.builtin.import_tasks:
     file: preapp_setup.yml
 
-- name: Downloading Maven Dependencies
-  ansible.builtin.shell: mvn clean package ; mv target/{{ component }}-1.0.jar {{ component }}.jar
-  args:
-    chdir: /app
+# this step goes with CI
+#- name: Downloading Maven Dependencies
+#  ansible.builtin.shell: mvn clean package ; mv target/{{ component }}-1.0.jar {{ component }}.jar
+#  args:
+#    chdir: /app
 
 - name: Mysql Setup
   ansible.builtin.import_tasks:
