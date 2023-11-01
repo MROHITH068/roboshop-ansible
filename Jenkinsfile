@@ -12,6 +12,12 @@ pipeline{
     }
 
     stages{
+        // Useful in Mutable and Immutable Strategy: So that new instances uses latest version instead of default version
+        stage ('Update Parameters'){
+                    steps{
+                     sh 'aws ssm put-parameter  --name roboshop.${ENV}.${COMPONENT}.app_version --type "String" --value "${APP_VERSION}" --overwrite'
+                    }
+                }
 
         stage ('Get Servers'){
             steps{
